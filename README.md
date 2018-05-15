@@ -1,5 +1,5 @@
 ## Introduction:
-  This project is nothing but trying to synchronize threads in Java, by simulating a scenario of the fair wheel ride in Java.
+  This project is nothing but trying to synchronize threads in Java, by simulating a scenario of the fair wheel ride in Java, a full description can found [here](https://github.com/AbdullahKady/thread-synchronization/blob/master/DOCS/description.pdf)
 
 
 ## Note:

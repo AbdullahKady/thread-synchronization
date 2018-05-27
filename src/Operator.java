@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class Operator {
 
+  // Since the output will always be reasonably small, an accumulating string
+  // would be better than a shared stream
+	static String output = "";
 	Wheel wheel;
 	Queue<Player> queuedPlayers = new LinkedList<Player>();
 	private int totalPlayerCount;
@@ -16,12 +19,23 @@ public class Operator {
 		this.inputFilePath = inputFilePath;
 	}
 
+  /*
+   * To avoid interleaving printing to the output between the various threads.
+   */
+  synchronized static void appendToOutput(String s, boolean lineBreak) {
+  	if (lineBreak)
+  		Operator.output += s + "\n";
+  	else
+  		Operator.output += s;
+  }
+
 	public void startOperator() {
 		initializeWheel();
 		/*
 		 * Keep checking on the wheel, if it's not running, we start boarding
 		 * players from the queue, if the queue is empty we check if all players
-		 * are done with their rides to terminate the program.
+		 * are done with their rides to terminate the program and write out the
+		 * output file.
 		 */
 		while (true) {
 			synchronized (this) {

@@ -36,7 +36,7 @@ public class Operator {
 		 * players from the queue, if the queue is empty we check if all players
 		 * are done with their rides to terminate the program and write out the
 		 * output file.
-		 */
+		*/
 		while (true) {
 			synchronized (this) {
 				if (!wheel.running) {
@@ -44,7 +44,20 @@ public class Operator {
 					if (currentPlayer != null) {
 						wheel.addPlayer(currentPlayer);
 					} else if (wheel.finishedPlayersCount == totalPlayerCount) {
-            System.out.println("\nOPERATOR: All players are done with their rides");
+            Operator.appendToOutput("\nOPERATOR: All players are done with their rides", true);
+
+            File file = new File("output.txt");
+            try {
+							FileWriter fileWriter = new FileWriter(file);
+							fileWriter.write(Operator.output);
+							fileWriter.flush();
+							fileWriter.close();
+						} catch (Exception e) {
+							System.out.println("SOMETHING WENT WRONG WHILE WRITING THE OUTPUT!\n");
+							e.printStackTrace();
+						}
+
+						System.out.println("Output has been written successfully.");
 						System.out.println("Terminating");
 						System.exit(0);
 					}

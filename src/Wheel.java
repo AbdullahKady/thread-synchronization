@@ -19,14 +19,14 @@ public class Wheel extends Thread {
 
 	public void run() {
 		while (true) {
-      System.out.println("WHEEL<sleep>: Sleeping...");
+			Operator.appendToOutput("WHEEL<sleep>: Sleeping...", true);
 			try {
 				sleep(maxWaitTime);
-        System.out.println("WHEEL<starting>: Wait time is over");
+				Operator.appendToOutput("WHEEL<starting>: Wait time is over", true);
 				startRide();
 			} catch (InterruptedException e) {
 				if (this.onBoardPlayers.size() == 5) {
-          System.out.println("WHEEL<starting>: Maximum capacity reached");
+					Operator.appendToOutput("WHEEL<starting>: Maximum capacity reached", true);
 					startRide();
 				}
 			}
@@ -41,16 +41,18 @@ public class Wheel extends Thread {
 
 	public void startRide() {
 		this.running = true;
+		synchronized (Operator.output) {
+			Operator.appendToOutput("\n=======================\nTHREADS IN RIDE ARE : \n", true);
 
-    System.out.println("\n=======================\nTHREADS IN RIDE ARE : \n");
-		for (Player player : this.onBoardPlayers) {
-      System.out.println(player.id + " ");
-			player.rideCompleted = true;
-			finishedPlayersCount++;
+			for (Player player : this.onBoardPlayers) {
+				Operator.appendToOutput(player.id + " ", false);
+				player.rideCompleted = true;
+				finishedPlayersCount++;
+			}
+
+			Operator.appendToOutput("\n=======================\n", true);
 		}
-		System.out.println("\n=======================\n");
-
-    this.onBoardPlayers = new LinkedList<Player>();
+		this.onBoardPlayers = new LinkedList<Player>();
 		this.running = false;
 	}
 
@@ -60,7 +62,7 @@ public class Wheel extends Thread {
 
 	synchronized public void addPlayer(Player p) {
 		this.onBoardPlayers.add(p);
-		System.out.println("WHEEL<boarded>: Player #" + p.id + " just boarded the wheel");
+		Operator.appendToOutput("WHEEL<boarded>: Player #" + p.id + " just boarded the wheel", true);
 	}
 
 }

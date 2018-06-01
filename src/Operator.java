@@ -123,4 +123,15 @@ public class Operator {
 	synchronized void addMe(Player player) {
 		this.queuedPlayers.add(player);
 	}
+
+  /*
+	 * Main method for testing, passing the input file path as a relevant path
+	 * in case it's in the same directory as the project files
+	 */
+
+	public static void main(String[] args) {
+    String inputFilePath = "../inputs/input-1.txt";
+		Operator op = new Operator(inputFilePath);
+		op.startOperator();
+	}
 }

@@ -4,4 +4,4 @@
 
 ## Note:
   Adjust the relevant path of the input files depending on your project setup
-In the current setup, I'm passing the relevant path assumnig the input files would be present at the folder of the project
+In the current setup, I'm passing the relevant path assumnig the input files would be present at the folder `inputs` in the parent directory of the source files.

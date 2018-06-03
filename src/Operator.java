@@ -130,7 +130,7 @@ public class Operator {
 	 */
 
 	public static void main(String[] args) {
-    String inputFilePath = "../inputs/input-1.txt";
+    String inputFilePath = "inputs/input-1.txt";
 		Operator op = new Operator(inputFilePath);
 		op.startOperator();
 	}

@@ -24,7 +24,7 @@ public class Player extends Thread {
 			System.exit(0);
 		}
 
-    System.out.println("PLAYER: #" + this.id + " Woke Up");
+		Operator.appendToOutput("PLAYER: #" + this.id + " Woke Up", true);
 		operator.addMe(this);
 	}
 }
